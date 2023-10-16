@@ -1,0 +1,24 @@
+{
+    "name": "threejs-sandbox",
+    "private": true,
+    "version": "0.0.0",
+    "type": "module",
+    "scripts": {
+        "prepare": "husky install",
+        "dev": "vite",
+        "build": "vite build"
+    },
+    "devDependencies": {
+        "@commitlint/cli": "^17.7.2",
+        "@commitlint/config-conventional": "^17.7.0",
+        "@trivago/prettier-plugin-sort-imports": "^4.2.0",
+        "husky": "^8.0.3",
+        "lint-staged": "^14.0.1",
+        "prettier": "^3.0.3",
+        "vite": "^4.3.9"
+    },
+    "dependencies": {
+        "lil-gui": "^0.18.1",
+        "three": "^0.153.0"
+    }
+}

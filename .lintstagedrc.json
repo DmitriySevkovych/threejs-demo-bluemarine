@@ -1,0 +1,4 @@
+{
+    "*.{html,css,js}": "prettier --write",
+    "*.json": "prettier --write"
+}
