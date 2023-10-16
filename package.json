@@ -1,5 +1,5 @@
 {
-    "name": "threejs-sandbox",
+    "name": "threejs-demo-bluemarinefoundation",
     "private": true,
     "version": "0.0.0",
     "type": "module",
@@ -15,7 +15,9 @@
         "husky": "^8.0.3",
         "lint-staged": "^14.0.1",
         "prettier": "^3.0.3",
-        "vite": "^4.3.9"
+        "prettier-plugin-glsl": "^0.1.2",
+        "vite": "^4.3.9",
+        "vite-plugin-glsl": "^1.1.2"
     },
     "dependencies": {
         "lil-gui": "^0.18.1",
