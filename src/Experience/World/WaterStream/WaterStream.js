@@ -6,10 +6,18 @@ import vertexShader from './vertex.glsl'
 
 export default class WaterStream {
     constructor(bubbles) {
+        this.bubbles = bubbles
+
         this.experience = new Experience()
         this.scene = this.experience.scene
+        this.debug = this.experience.debug
+        this.time = this.experience.time
+        this.resources = this.experience.resources
 
-        this.bubbles = bubbles
+        // Debug
+        if (this.debug.active) {
+            this.debugFolder = this.debug.ui.addFolder('water stream')
+        }
 
         this.setGeometry()
         this.setMaterial()
@@ -43,11 +51,15 @@ export default class WaterStream {
             'aRandom',
             new THREE.BufferAttribute(randoms, 3)
         )
-        this.geometry.setAttribute('size', new THREE.BufferAttribute(sizes, 1))
+        this.geometry.setAttribute('aSize', new THREE.BufferAttribute(sizes, 1))
     }
 
     setMaterial() {
         this.material = new THREE.ShaderMaterial({
+            uniforms: {
+                time: { value: this.time.elapsed },
+                uSphereNormals: { value: this.resources.sphereNormals },
+            },
             vertexShader,
             fragmentShader,
             side: THREE.DoubleSide,
@@ -57,5 +69,9 @@ export default class WaterStream {
     setMesh() {
         this.mesh = new THREE.Points(this.geometry, this.material)
         this.scene.add(this.mesh)
+    }
+
+    update() {
+        this.material.uniforms.time.value = this.time.elapsed
     }
 }
