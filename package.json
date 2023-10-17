@@ -6,7 +6,8 @@
     "scripts": {
         "prepare": "husky install",
         "dev": "vite",
-        "build": "vite build"
+        "build": "vite build",
+        "deploy": "vercel --prod"
     },
     "devDependencies": {
         "@commitlint/cli": "^17.7.2",
@@ -21,6 +22,7 @@
     },
     "dependencies": {
         "lil-gui": "^0.18.1",
-        "three": "^0.153.0"
+        "three": "^0.153.0",
+        "vercel": "^32.4.1"
     }
 }
