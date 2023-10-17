@@ -56,7 +56,7 @@ export default class WaterStream {
 
     setMaterial() {
         const parameters = {
-            bubbleColor: '#34858D',
+            bubbleColor: '#79c6ce',
             bubbleSize: 50,
         }
 
