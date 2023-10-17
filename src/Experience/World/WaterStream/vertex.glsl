@@ -1,11 +1,15 @@
+#include ../shaders/constants;
+#include ../shaders/perlinNoise;
+
 attribute vec3 aRandom;
 attribute float aSize;
 
 uniform float time;
+uniform float uBaseBubbleSize;
 
 varying vec2 vUv;
 
-float PI = 3.14159265359;
+const float SLOWDOWN = 0.00001;
 
 vec3 getCurve(float progress) {
     float angle = 2.0 * PI * progress;
@@ -38,24 +42,20 @@ vec3 getPositionOnWaterstreamCurve(float progress) {
     vec3 binormal = normalize(cross(normal, tangent));
 
     float radius = 0.3 + aRandom.z * 0.1;
-    float displacementA =
-        radius *
-        cos(2.0 * PI * (1.0 + 0.0001 * time) * aRandom.x + 7.0 * aRandom.y);
-    float displacementB =
-        radius *
-        sin(2.0 * PI * (1.0 + 0.0001 * time) * aRandom.x + 7.0 * aRandom.y);
-    return positionOnCurve + normal * displacementA + binormal * displacementB;
+    float rotationProgress = 2.0 * PI * perlin(vec2(SLOWDOWN * time), 2.) * aRandom.x + 7.0 * aRandom.y;
+    float rotationA = radius * cos(rotationProgress);
+    float rotationB = radius * sin(rotationProgress);
+    return positionOnCurve + normal * rotationA + binormal * rotationB;
 
 }
 
 void main() {
     vUv = uv;
 
-    float progress = fract(0.0001 * time + aRandom.x);
+    float progress = fract(SLOWDOWN * time + aRandom.x);
     vec3 positionOnCurve = getPositionOnWaterstreamCurve(progress);
 
     vec4 modelViewPosition = modelViewMatrix * vec4(positionOnCurve, 1.0);
-    gl_PointSize =
-        50.0 * length(aRandom) * aSize * (-1.0 / modelViewPosition.z);
+    gl_PointSize = uBaseBubbleSize * length(aRandom) * aSize * (-1.0 / modelViewPosition.z);
     gl_Position = projectionMatrix * modelViewPosition;
 }

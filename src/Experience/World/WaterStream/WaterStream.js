@@ -55,15 +55,41 @@ export default class WaterStream {
     }
 
     setMaterial() {
+        const parameters = {
+            bubbleColor: '#34858D',
+            bubbleSize: 50,
+        }
+
         this.material = new THREE.ShaderMaterial({
             uniforms: {
                 time: { value: this.time.elapsed },
-                uSphereNormals: { value: this.resources.sphereNormals },
+                uSphereNormals: { value: this.resources.items.sphereNormals },
+                uBubbleColor: {
+                    value: new THREE.Color(parameters.bubbleColor),
+                },
+                uBaseBubbleSize: { value: parameters.bubbleSize },
             },
             vertexShader,
             fragmentShader,
-            side: THREE.DoubleSide,
+            transparent: true,
+            depthTest: false,
         })
+
+        if (this.debug.active) {
+            this.debugFolder
+                .add(parameters, 'bubbleSize', 10, 100)
+                .onChange(
+                    (value) =>
+                        (this.material.uniforms.uBaseBubbleSize.value = value)
+                )
+            this.debugFolder
+                .addColor(parameters, 'bubbleColor')
+                .onChange(
+                    (color) =>
+                        (this.material.uniforms.uBubbleColor.value =
+                            new THREE.Color(color))
+                )
+        }
     }
 
     setMesh() {
