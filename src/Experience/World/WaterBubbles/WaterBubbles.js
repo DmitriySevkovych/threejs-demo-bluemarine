@@ -4,7 +4,7 @@ import Experience from '../../Experience.js'
 import fragmentShader from './fragment.glsl'
 import vertexShader from './vertex.glsl'
 
-export default class WaterStream {
+export default class WaterBubbles {
     constructor(bubbles) {
         this.bubbles = bubbles
 
@@ -16,7 +16,7 @@ export default class WaterStream {
 
         // Debug
         if (this.debug.active) {
-            this.debugFolder = this.debug.ui.addFolder('water stream')
+            this.debugFolder = this.debug.ui.addFolder('water bubbles')
         }
 
         this.setGeometry()
