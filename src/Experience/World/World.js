@@ -1,5 +1,6 @@
 import Experience from '../Experience.js'
 import WaterBubbles from './WaterBubbles/WaterBubbles.js'
+import WaterStream from './WaterStream/WaterStream.js'
 
 export default class World {
     constructor() {
@@ -10,11 +11,16 @@ export default class World {
         // Setup
         // Wait for resources
         this.resources.on('ready', () => {
+            this.resourcesLoaded = true
             this.waterBubbles = new WaterBubbles(10000)
+            this.waterStream = new WaterStream(100)
         })
     }
 
     update() {
-        if (this.waterBubbles) this.waterBubbles.update()
+        if (!this.resourcesLoaded) return
+
+        this.waterBubbles.update()
+        this.waterStream.update()
     }
 }
