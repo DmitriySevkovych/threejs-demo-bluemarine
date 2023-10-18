@@ -27,15 +27,10 @@ export default class WaterBubbles {
     setGeometry() {
         this.geometry = new THREE.BufferGeometry()
 
-        const positions = new Float32Array(this.bubbles * 3)
         const randoms = new Float32Array(this.bubbles * 3)
         const sizes = new Float32Array(this.bubbles * 3)
 
         for (let i = 0; i < this.bubbles; i++) {
-            positions[3 * i + 0] = Math.random() - 0.5
-            positions[3 * i + 1] = Math.random() - 0.5
-            positions[3 * i + 2] = Math.random() - 0.5
-
             randoms[3 * i + 0] = Math.random()
             randoms[3 * i + 1] = Math.random()
             randoms[3 * i + 2] = Math.random()
@@ -43,9 +38,10 @@ export default class WaterBubbles {
             sizes[i] = 0.5 + 0.5 * Math.random()
         }
 
+        // position attribute has to be set, but the actual positions are calculated in the vertex shader
         this.geometry.setAttribute(
             'position',
-            new THREE.BufferAttribute(positions, 3)
+            new THREE.BufferAttribute(new Float32Array(this.bubbles * 3), 3)
         )
         this.geometry.setAttribute(
             'aRandom',
@@ -56,8 +52,8 @@ export default class WaterBubbles {
 
     setMaterial() {
         const parameters = {
-            bubbleColor: '#79c6ce',
-            bubbleSize: 50,
+            bubbleColor: '#dddef7',
+            bubbleSize: 40,
         }
 
         this.material = new THREE.ShaderMaterial({

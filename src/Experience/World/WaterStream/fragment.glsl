@@ -6,7 +6,7 @@ varying vec2 vUv;
 varying vec3 vNormal;
 varying vec3 vWorldPosition;
 
-const float SLOWDOWN = 0.00002;
+const float SLOWDOWN = 0.00007;
 
 vec3 getViewDirection() {
     return normalize(cameraPosition - vWorldPosition);

@@ -9,7 +9,7 @@ uniform float uBaseBubbleSize;
 
 varying vec2 vUv;
 
-const float SLOWDOWN = 0.00001;
+const float SLOWDOWN = 0.00005;
 
 vec3 getCurve(float progress) {
     float angle = 2.0 * PI * progress;

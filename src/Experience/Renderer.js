@@ -20,7 +20,7 @@ export default class Renderer {
 
     setInstance() {
         const parameters = {
-            clearColor: '#05233c',
+            clearColor: '#0c548f',
         }
         this.instance = new THREE.WebGLRenderer({
             canvas: this.canvas,
