@@ -1,4 +1,5 @@
 import Experience from '../Experience.js'
+import Godrays from './Godrays/Godrays.js'
 import WaterBubbles from './WaterBubbles/WaterBubbles.js'
 import WaterStream from './WaterStream/WaterStream.js'
 
@@ -14,6 +15,7 @@ export default class World {
             this.resourcesLoaded = true
             this.waterBubbles = new WaterBubbles(10000)
             this.waterStream = new WaterStream(100)
+            this.godrays = new Godrays()
         })
     }
 
@@ -22,5 +24,6 @@ export default class World {
 
         this.waterBubbles.update()
         this.waterStream.update()
+        this.godrays.update()
     }
 }

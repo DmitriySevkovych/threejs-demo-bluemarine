@@ -14,4 +14,9 @@ export default [
         type: 'texture',
         path: 'textures/dots.png',
     },
+    {
+        name: 'godraysNoise',
+        type: 'texture',
+        path: 'textures/noise.png',
+    },
 ]
